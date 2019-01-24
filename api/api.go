@@ -6,7 +6,7 @@ import (
 
 	"github.com/kelseyhightower/envconfig"
 	"github.com/labstack/echo"
-	_ "github.com/lib/pq"
+	_ "github.com/lib/pq" // imported to postgres service
 	"github.com/ymohl-cl/fizzbuzz/algo"
 )
 
@@ -15,10 +15,14 @@ const (
 	routeStats    = "stats"
 )
 
+// API describe the endpoints and drivers needed
 type API struct {
 	driver *sql.DB
 }
 
+// Init get the configuration to the api
+// Get the postgres driver and create the connexion
+// Implement routes fizzbuzz and statistiques
 func Init(appName string, router *echo.Group) (*API, error) {
 	var err error
 	var c Config
@@ -27,7 +31,7 @@ func Init(appName string, router *echo.Group) (*API, error) {
 	if err = envconfig.Process(appName, &c); err != nil {
 		return nil, err
 	}
-	connSTR := "user=" + c.PostgresUser + " dbname=" + c.PostgresDB + "sslmode=disable"
+	connSTR := c.connSTR()
 	if a.driver, err = sql.Open("postgres", connSTR); err != nil {
 		return nil, err
 	}
@@ -65,7 +69,7 @@ func (a API) FizzBuzz(c echo.Context) error {
 		c.Logger().Info(err.Error())
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
-	if err = a.Record(data); err != nil {
+	if err = a.record(data); err != nil {
 		c.Logger().Error(err.Error())
 		return c.JSON(http.StatusInternalServerError, "please contact administrator")
 	}
@@ -77,9 +81,12 @@ func (a API) Stats(c echo.Context) error {
 	var output []OutputStat
 	var err error
 
-	if output, err = a.MaxRecord(); err != nil {
+	if output, err = a.maxRecord(); err != nil {
 		c.Logger().Error(err.Error())
 		return c.JSON(http.StatusInternalServerError, "please contact administrator")
+	}
+	if len(output) == 0 {
+		return c.NoContent(http.StatusNoContent)
 	}
 	return c.JSON(http.StatusOK, output)
 }

@@ -1,15 +1,32 @@
 version: '3'
 services:
-  fizzbuzz:
-    build: .
-    ports:
-     - "4242:4242"
-  postgres:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: ymohl-cl
-      POSTGRES_DB: fizzbuzz
-    volumes:
-      - ./dump/:/docker-entrypoint-initdb.d/
+    fizzbuzz:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: fizzbuzz
+        volumes:
+            - "./Bin/:/bin"
+        links:
+            - postgres:postgres
+        ports:
+            - 4242:4242
+        environment:
+            FIZZBUZZ_SSL_ENABLE: "false"
+            FIZZBUZZ_PORT: 4242
+            FIZZBUZZ_POSTGRES_HOST: "postgres"
+            FIZZBUZZ_POSTGRES_PORT: 5432
+            FIZZBUZZ_POSTGRES_USER: "ymohl-cl"
+            FIZZBUZZ_POSTGRES_PASSWORD: "password_example"
+            FIZZBUZZ_POSTGRES_DB: "fizzbuzz-db"
+    postgres:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: "password_example"
+            POSTGRES_USER: "ymohl-cl"
+            POSTGRES_DB: "fizzbuzz-db"
+        volumes:
+            - ./dump/:/docker-entrypoint-initdb.d/
+        ports:
+            - 5432:5432

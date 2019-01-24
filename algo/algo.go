@@ -5,10 +5,17 @@ import (
 	"strconv"
 )
 
+// errors list
 const (
-	ErrModuloZero = "specification use an impossible modulo operation by zero"
-	ErrBadRange   = "start must be smaller than limit"
-	ErrBadValues  = "values can't be empty"
+	ErrModuloZero    = "specification use an impossible modulo operation by zero"
+	ErrBadRange      = "start must be smaller than limit"
+	ErrBadValues     = "values can't be empty"
+	ErrValuesTooLong = "values are limited to 254 characters"
+)
+
+// constraints values
+const (
+	limitValue = 254
 )
 
 // Algo define the specifics configuration to run the FizzBuzz
@@ -65,6 +72,9 @@ func (a Algo) check() error {
 	}
 	if a.Value1 == "" || a.Value2 == "" {
 		return errors.New(ErrBadValues)
+	}
+	if len(a.Value1) > limitValue || len(a.Value2) > limitValue {
+		return errors.New(ErrValuesTooLong)
 	}
 	return nil
 }

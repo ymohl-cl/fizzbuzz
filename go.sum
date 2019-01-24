@@ -30,7 +30,9 @@ github.com/valyala/bytebufferpool v1.0.0 h1:GqA5TC/0021Y/b9FG4Oi9Mr3q7XYx6Kllzaw
 github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=
 github.com/valyala/fasttemplate v0.0.0-20170224212429-dcecefd839c4 h1:gKMu1Bf6QINDnvyZuTaACm9ofY+PRh+5vFz4oxBZeF8=
 github.com/valyala/fasttemplate v0.0.0-20170224212429-dcecefd839c4/go.mod h1:50wTf68f99/Zt14pr046Tgt3Lp2vLyFZKzbFXTOabXw=
+github.com/ymohl-cl/gopkg/httput v1.0.0 h1:eiDqjRUykZHalfqtH8qXAhYUP5jdrpetNe5c/2UnorU=
 github.com/ymohl-cl/gopkg/httput v1.0.0/go.mod h1:BiSe+4scVeCz3R/yYVZvRBFOiDb6Prt+A5VRU5SXTBk=
+github.com/ymohl-cl/gopkg/httput v1.1.0/go.mod h1:BiSe+4scVeCz3R/yYVZvRBFOiDb6Prt+A5VRU5SXTBk=
 github.com/ymohl-cl/gopkg/server v1.0.1 h1:6onCvnERu7eFQPasvYRL1XjA9wt/YhKh8Ra5XV3i/1k=
 github.com/ymohl-cl/gopkg/server v1.0.1/go.mod h1:ODLgXlvuAZc8rZlXcG5vngek/7MF+uXuG762QILkr78=
 golang.org/x/crypto v0.0.0-20180904163835-0709b304e793/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
@@ -38,3 +40,5 @@ golang.org/x/crypto v0.0.0-20181203042331-505ab145d0a9 h1:mKdxBk7AujPs8kU4m80U72
 golang.org/x/crypto v0.0.0-20181203042331-505ab145d0a9/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
 golang.org/x/sys v0.0.0-20180905080454-ebe1bf3edb33 h1:I6FyU15t786LL7oL/hn43zqTuEGr4PN7F4XJ1p4E3Y8=
 golang.org/x/sys v0.0.0-20180905080454-ebe1bf3edb33/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
+gopkg.in/DATA-DOG/go-sqlmock.v1 v1.3.0 h1:FVCohIoYO7IJoDDVpV2pdq7SgrMH6wHnuTyrdrxJNoY=
+gopkg.in/DATA-DOG/go-sqlmock.v1 v1.3.0/go.mod h1:OdE7CF6DbADk7lN8LIKRzRJTTZXIjtWgA5THM5lhBAw=

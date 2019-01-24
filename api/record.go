@@ -4,29 +4,30 @@ import (
 	"database/sql"
 )
 
-func (a API) Record(data InputFB) error {
+func (a API) record(data InputFB) error {
 	var err error
 	var id string
 
 	id = data.Hash()
 	sqlStatement := `INSERT INTO stats
-				(id, limit, int1, int2, str1, str2, count)
+				(id, limit_range, int1, int2, str1, str2, nb_record)
 				VALUES ($1, $2, $3, $4, $5, $6, $7)
-				ON DUPLICATE KEY UPDATE count=count+1`
+				ON CONFLICT (id) DO UPDATE SET nb_record = stats.nb_record + 1`
 	if _, err = a.driver.Exec(sqlStatement, id, data.Limit, data.Int1, data.Int2, data.Str1, data.Str2, 1); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (a API) MaxRecord() ([]OutputStat, error) {
+func (a API) maxRecord() ([]OutputStat, error) {
 	var ret []OutputStat
 	var err error
 	var rows *sql.Rows
 
-	sqlStatement := `SELECT limit, int1, int2, str1, str2, count
+	sqlStatement := `SELECT limit_range, int1, int2, str1, str2, nb_record
 				FROM stats
-				WHERE count=MAX(count)`
+				WHERE nb_record = (SELECT MAX(nb_record)
+				FROM stats)`
 	if rows, err = a.driver.Query(sqlStatement); err != nil {
 		return nil, err
 	}

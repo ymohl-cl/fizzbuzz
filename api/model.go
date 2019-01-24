@@ -13,7 +13,7 @@ type InputFB struct {
 	Str2  string `json:"str2"`
 }
 
-// OutputStat
+// OutputStat describre the json response to call at Stats endpoint
 type OutputStat struct {
 	InputFB
 	Count int64 `json:"count"`
