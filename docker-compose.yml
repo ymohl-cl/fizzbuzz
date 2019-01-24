@@ -1,0 +1,15 @@
+version: '3'
+services:
+  fizzbuzz:
+    build: .
+    ports:
+     - "4242:4242"
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: ymohl-cl
+      POSTGRES_DB: fizzbuzz
+    volumes:
+      - ./dump/:/docker-entrypoint-initdb.d/
